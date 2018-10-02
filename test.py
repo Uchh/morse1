@@ -11,6 +11,6 @@ class MorseDecoderTest(unittest.TestCase):
 
 
 # Чтобы запустить тесты: python -m python -m unittest morse_code/test.py
-# Запустить из текущей директории
+# Запустить из текущей директорииdd
 if __name__ == '__main__':
     unittest.main()
