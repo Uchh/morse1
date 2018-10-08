@@ -25,14 +25,41 @@ class MorseDecoder:
         ".__": "W",
         "_.._": "X",
         "_.__": "Y",
-        "__..": "Z",
+        "__..": "Z"
     }
 
     def decode(self, cipher):
-        """
-        Функция декодирует шифр
-        :param cipher: str шифр морзе
-        :return: str полученное слово
-        """
+        for i in range(len(cipher)):    # Цикл проверки ввода, отсеиваем цифры и буквы
+            if cipher[i].isalpha():
+                return "ERROR - вы ввели букву? Пожалуйста, введите шифр\n"
+            elif cipher[i].isalnum():
+                return "ERROR - вы ввели цифру? Пожалуйста, введите шифр\n"
+        c = 0   # Для вырезки
+        l1 = 0  # Для удаления лишнего пробела
+        f = ""  # Окончательный ответ
+        z = ""  # Отдельно расшифрованная буква
+        k = ""  # Вырезанный кусок шифра
+        j = ""  # Ответ без форматирования
+        for i in range(len(cipher)):    # Данный цикл "вырезает" из шифра куски с отдельными буквами
+            if cipher[i].isspace():     # и складывает воедино расшифрованные куски
+                k = cipher[c:i]
+                z = self.codes.get(k)
+                j = j + z
+                c = i + 1
+        for i in range(len(j)):   # Данный цикл удаляет лишний пробел в коцне строки
+            l1 = len(j)
+            if l1 - i == 1:
+                f = f + j[i]
+            else:
+                f = f + j[i] + " "
+        return f
 
-        # TODO: Реализовать функциюddd
+
+if __name__ == "__main__":
+    decoder = MorseDecoder()
+    p = 1
+    while p == 1:
+        print("Каждую букву в шифре(даже последнюю) отделять пробелом!\n")
+        decoded_word = decoder.decode(input("Введите шифр для расшифровки:\n"))
+        print(decoded_word)
+        p = int(input("Повторить? 1 - да , 0 - нет\n"))
