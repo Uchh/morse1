@@ -29,30 +29,22 @@ class MorseDecoder:
     }
 
     def decode(self, cipher):
-        for i in range(len(cipher)):    # Цикл проверки ввода, отсеиваем цифры и буквы
+        for i in range(len(cipher)):
             if cipher[i].isalpha():
                 return "ERROR - вы ввели букву? Пожалуйста, введите шифр\n"
             elif cipher[i].isalnum():
                 return "ERROR - вы ввели цифру? Пожалуйста, введите шифр\n"
-        c = 0   # Для вырезки
-        l1 = 0  # Для удаления лишнего пробела
-        f = ""  # Окончательный ответ
-        z = ""  # Отдельно расшифрованная буква
-        k = ""  # Вырезанный кусок шифра
-        j = ""  # Ответ без форматирования
-        for i in range(len(cipher)):    # Данный цикл "вырезает" из шифра куски с отдельными буквами
-            if cipher[i].isspace():     # и складывает воедино расшифрованные куски
-                k = cipher[c:i]
-                z = self.codes.get(k)
-                j = j + z
-                c = i + 1
-        for i in range(len(j)):   # Данный цикл удаляет лишний пробел в коцне строки
-            l1 = len(j)
+        otvets = ""
+        otvet = ""
+        for letter in cipher.split(" "):
+            otvets += self.codes.get(letter)
+        for i in range(len(otvets)):
+            l1 = len(otvets)
             if l1 - i == 1:
-                f = f + j[i]
+                otvet += otvets[i]
             else:
-                f = f + j[i] + " "
-        return f
+                otvet += otvets[i] + " "
+        return otvet
 
 
 if __name__ == "__main__":
