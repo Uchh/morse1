@@ -54,4 +54,4 @@ if __name__ == "__main__":
         print("Каждую букву в шифре(даже последнюю) отделять пробелом!\n")
         decoded_word = decoder.decode(input("Введите шифр для расшифровки:\n"))
         print(decoded_word)
-        p = int(input("Повторить? 1 - да , 0 - нет\n"))
+        p = int(input("Повторить? 1 - да , 0 - нет\n")) #1
